@@ -1,20 +1,13 @@
-require('dotenv').config(); 
-const MongoClient = require('mongodb').MongoClient;
-const uri = process.env.DATABASE_CONNECTION;
-const client = new MongoClient(uri);
+const mongoose = require("mongoose");
+require("dotenv").config();
 
+const connection = mongoose.connect(process.env.DATABASE_CONNECTION, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("Connected to database");
+}).catch((err) => {
+    console.log("Error connecting to database", err);
+});
 
-let instance = null;
-
-async function getConnection(){
-    if(instance == null){
-        try{
-            instance = await client.connect();
-        } catch(err){
-            console.log(err.message);
-        }
-    }
-    return instance;
-}
-
-module.exports = {getConnection};
+module.exports = {connection}

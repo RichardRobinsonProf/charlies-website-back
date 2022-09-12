@@ -5,11 +5,18 @@ const { transporter } = require("../data/mailer");
 
 /* GET users listing. */
 
-router.post ("/send-email", async (req, res) => {
+/* router.post ("/send-email", async (req, res) => {
     const { email,telephone, name, message } = req.body;
     console.log(email,telephone, name, message);
     res.send("ok");
-})
+}) */
+
+router.get("/", async (req, res) => {
+  const users = await data.getUsers();
+  res.json(users);
+});
+
+
 
 router.post("/", async (req, res) => {
   const user = req.body;
@@ -25,37 +32,52 @@ router.post("/", async (req, res) => {
           subject: `${user.firstName} ${user.lastName} found a group`,
           text: " ",
           html: `<div>
-          <h1>${user.firstName} found a group <h1>
-          <p>name: ${user.firstName} ${user.lastName}<p>
-          <p>email: ${user.email}<p>
-          <p>language: ${user.language}<p>
-          <p>level: ${user.level}<p>
-          <p>objective: ${user.objective}<p>
-          <p>exam: ${user.exam}<p>
-          <p>timezone value: ${user.timeZone.value}<p>
-          <p>timezone: ${user.timeZone.label}<p>
-          <p>timezone offset: ${user.timeZone.offset}<p>
-          <h1>Group(s)<h1>
-          ${listMoments.map(
-            (group) => `
-            <h1>group ${listMoments.indexOf(group) + 1}<h1>
-            ${group.map(
-              (moment) => `
-              ${group.indexOf(moment) === 0 ? `<p>scheduled class: ${moment.timeUserCurrent.day} ${moment.timeUserCurrent.hour < 10 ? `0${moment.timeUserCurrent.hour}` : `${moment.timeUserCurrent.hour}`} : ${moment.timeUserCurrent.minute < 10 ? `0${moment.timeUserCurrent.minute}` : `${moment.timeUserCurrent.minute}`} Argentine time<p>` : `------------------`}
-              <p>name: ${moment.similarUser.firstName} ${moment.similarUser.lastName}<p>
-              <p>email: ${moment.similarUser.email}<p>
-              <p>language: ${moment.similarUser.language}<p>
-              <p>level: ${moment.similarUser.level}<p>
-              <p>objective: ${moment.similarUser.objective}<p>
-              <p>exam: ${moment.similarUser.exam}<p>
-              <p>timezone value: ${moment.similarUser.timeZone.value}<p>
-              <p>timezone: ${moment.similarUser.timeZone.label}<p>
-              <p>timezone offset: ${moment.similarUser.timeZone.offset}<p>
-              `
-            )}
-            <p>----------------------------------------------<p>
-          `)}
-          </div>`
+           <h1>${user.firstName} found a group <h1>
+           <p>name: ${user.firstName} ${user.lastName}<p>
+           <p>email: ${user.email}<p>
+           <p>language: ${user.language}<p>
+           <p>level: ${user.level}<p>
+           <p>objective: ${user.objective}<p>
+           <p>exam: ${user.exam}<p>
+           <p>timezone value: ${user.timeZone.value}<p>
+           <p>timezone: ${user.timeZone.label}<p>
+           <p>timezone offset: ${user.timeZone.offset}<p>
+           <h1>Group(s)<h1>
+           ${listMoments.map(
+             (group) => `
+             <h1>group ${listMoments.indexOf(group) + 1}<h1>
+             ${group.map(
+               (moment) => `
+               ${
+                 group.indexOf(moment) === 0
+                   ? `<p>scheduled class: ${moment.timeUserCurrent.day} ${
+                       moment.timeUserCurrent.hour < 10
+                         ? `0${moment.timeUserCurrent.hour}`
+                         : `${moment.timeUserCurrent.hour}`
+                     }:${
+                       moment.timeUserCurrent.minute < 10
+                         ? `0${moment.timeUserCurrent.minute}`
+                         : `${moment.timeUserCurrent.minute}`
+                     } Argentine time<p>`
+                     : `------------------`
+               }
+               <p>name: ${moment.similarUser.firstName} ${
+                 moment.similarUser.lastName
+               }<p>
+               <p>email: ${moment.similarUser.email}<p>
+               <p>language: ${moment.similarUser.language}<p>
+               <p>level: ${moment.similarUser.level}<p>
+               <p>objective: ${moment.similarUser.objective}<p>
+               <p>exam: ${moment.similarUser.exam}<p>
+               <p>timezone value: ${moment.similarUser.timeZone.value}<p>
+               <p>timezone: ${moment.similarUser.timeZone.label}<p>
+               <p>timezone offset: ${moment.similarUser.timeZone.offset}<p>
+               `
+             )}
+             <p>----------------------------------------------<p>
+           `
+           )}
+           </div>`,
         })
       : console.log("No groups");
     res.json(`${listMoments.length > 0 ? "ok" : "no groups"}`);

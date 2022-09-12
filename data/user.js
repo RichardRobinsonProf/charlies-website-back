@@ -1,25 +1,46 @@
 require('dotenv').config();
 const mongodb = require('mongodb');
-const connection = require ('./connection');
+const {connection} = require("./connection");
+const User = require("../models/User");
 
 
-async function searchSimilarUsers(user){
-	const connectionDB = await connection.getConnection();
-	const result = await connectionDB.db('charlies-website')
-		.collection('users')
-		.find({language: user.language, level: user.level})  //email: !user.email
-		.toArray();
+
+ async function searchSimilarUsers(user){
+	const today = new Date();
+	const oneYearago = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+	const result = await User.find({
+		language: user.language,
+		level: user.level,	
+		createdAt: {
+			$gte: oneYearago,
+		}
+		//email: {$ne: user.email},
+	});
 	return result;
-}
+} 
 
 async function addUser(user){
-	const connectionDB = await connection.getConnection();
-	const result = await connectionDB.db('charlies-website')
-		.collection('users')
-		.insertOne(user);
-	
-	
+	const newUser = new User({
+		firstName: user.firstName,
+		lastName: user.lastName,
+		email: user.email,
+		language: user.language,
+		level: user.level,
+		objective: user.objective,
+		exam: user.exam,
+		timeZone: user.timeZone,
+		argentineTime: user.argentineTime,
+		localTime: user.localTime,
+	});
+	console.log(newUser);
+	const result = await newUser.save();
 	return result;
 }
 
-module.exports = {addUser, searchSimilarUsers};
+
+ async function getUsers () {
+    const users = await User.find({});
+	console.log(users)
+} 
+
+module.exports = { getUsers, addUser, searchSimilarUsers };
