@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 
-
+console.log(process.env.NODE_ENV)
 
 
 // catch 404 and forward to error handler
