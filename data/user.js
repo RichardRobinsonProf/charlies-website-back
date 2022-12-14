@@ -12,9 +12,9 @@ const User = require("../models/User");
 		language: user.language,
 		level: user.level,	
 		createdAt: {
-			$gte: oneYearago,
-		}
-		//email: {$ne: user.email},
+			$gte: oneYearago,	
+		},
+		email: {$ne: user.email},
 	});
 	return result;
 } 
@@ -27,10 +27,15 @@ async function addUser(user){
 		language: user.language,
 		level: user.level,
 		objective: user.objective,
+		phone: user.telephone,
 		exam: user.exam,
 		timeZone: user.timeZone,
 		argentineTime: user.argentineTime,
 		localTime: user.localTime,
+		pricePack: user.pricePack,
+		wantsGroup: user.wantsGroup,
+		price: user.price,
+		amountMonths: user.amountMonths	
 	});
 	console.log(newUser);
 	const result = await newUser.save();

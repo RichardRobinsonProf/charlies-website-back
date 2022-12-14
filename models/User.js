@@ -33,12 +33,16 @@ const userSchema = new mongoose.Schema({
     level: {
         type: String,
         required: true,
-        enum: ["Beginner", "Pre-intermediate", "Intermediate", "Upper-intermediate" ,"Advanced"]
+        enum: ["Beginner", "Pre-Intermediate", "Intermediate", "Upper-Intermediate" ,"Advanced"]
     },
     objective: {
         type: String,
         required: true,
-        enum: ["Conversation", "Exam", "Business", "Other"]
+        enum: ["Conversation", "Exam", "Business"]
+    },
+    phone: {
+        type: String,
+        required: true,
     },
     exam: {
         trim: true,
@@ -56,6 +60,23 @@ const userSchema = new mongoose.Schema({
     localTime: {
         type: Array,
         required: true,
+    },
+    wantsGroup : {
+        type: Boolean,
+        required: false,
+    },
+    pricePack : {
+        type: String,
+        required: false,
+        enum: ["Starter", "Pro", "Semi-pro"]
+    },
+    price: {
+        type: String,
+        required: false,
+    },
+    amountMonths: {
+        type: String,
+        required: false,
     }
 }); 
 
