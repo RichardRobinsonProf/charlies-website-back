@@ -5,6 +5,7 @@ const User = require("../models/User");
 
 
 
+
  async function searchSimilarUsers(user){
 	const today = new Date();
 	const oneYearago = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
