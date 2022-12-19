@@ -1,13 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
+const compression = require('compression');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
-
-
-
-
 
 // https://www.youtube.com/watch?v=KjheexBLY4A&ab_channel=DominiCode
 
@@ -17,6 +14,7 @@ var app = express();
 
 // view engine setup
 app.use(cors());
+app.use(compression());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
