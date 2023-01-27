@@ -23,7 +23,7 @@ router.post("/send-emailAddress", async (req, res) => {
   try{
     await transporter.sendMail({
       from: "website",
-      to: "tom.maenhout@gmail.com",
+      to: "prof.richard.robinson@gmail.com",
       subject: "User email",
       text: email,
       html: `<p>New user shared his/her email.</p> <p>${email}</p>`,
@@ -42,7 +42,7 @@ router.post("/send-email", async (req, res) => {
   try{
     await transporter.sendMail({
       from: "website",
-      to: "tom.maenhout@gmail.com",
+      to: "prof.richard.robinson@gmail.com",
       subject: "New message from " + name,
       text: message,
       html: `<p>${name}</p> <p>${email}</p> <p>${telephone}</p> <p>${message}</p>`
@@ -59,7 +59,7 @@ router.post("/individual", async (req, res) => {
   try{
     await transporter.sendMail({
       from: "website",
-      to: "tom.maenhout@gmail.com",
+      to: "prof.richard.robinson@gmail.com",
       subject: "User email",
       text:`<p>${user.firstName}  wants individual classes</p>` ,
       html: `<div>
@@ -100,7 +100,7 @@ router.post("/", async (req, res) => {
     listMoments.length > 0
       ? await transporter.sendMail({
           from: "Search Groups",
-          to: "tom.maenhout@gmail.com",
+          to: "prof.richard.robinson@gmail.com",
           subject: `${user.firstName} ${user.lastName} found a group`,
           text: " ",
           html: `<div>
@@ -164,7 +164,7 @@ router.post("/", async (req, res) => {
       : 
        await transporter.sendMail({
         from: "Search Groups",
-        to: "tom.maenhout@gmail.com",
+        to: "prof.richard.robinson@gmail.com",
         subject: `${user.firstName} ${user.lastName} searched for a group but didn't find one`,
         text: " ",
         html: `<div>
