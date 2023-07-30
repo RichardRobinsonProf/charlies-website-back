@@ -77,6 +77,10 @@ const userSchema = new mongoose.Schema({
     amountMonths: {
         type: String,
         required: false,
+    },
+    languageStudent: {
+        type: String,
+        required: false,
     }
 }); 
 

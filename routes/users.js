@@ -19,8 +19,6 @@ router.get("/", async (req, res) => {
 router.post("/send-emailAddress", async (req, res) => {
   const email = req.body.email;
   const language = req.body.language;
-
-  console.log(email)
   try{
     await transporter.sendMail({
       from: "website",
@@ -29,7 +27,7 @@ router.post("/send-emailAddress", async (req, res) => {
       text: email,
       html: `<p>New user shared his/her email.</p> 
              <p>${email}</p>
-             <p>Language user: ${language}</p>
+             <p>Language user on website: ${language}</p>
              `,
     });
     res.send("ok");
@@ -81,6 +79,7 @@ router.post("/individual", async (req, res) => {
       <p>package: ${user.pricePack}</p>
       <p>price: ${user.price}</p>
       <p>amountMonths: ${user.amountMonths}</p>
+      <p>language user on website: ${user.languageStudent}</p>
       <p>prefered schedule (Argentine time): ${user.argentineTime.map((time) =>
         `<p>${time.day + " " + time.hour + ":" + time.minute}</p>`
       )}</p>
@@ -122,6 +121,7 @@ router.post("/", async (req, res) => {
            <p>package: ${user.pricePack}</p>
            <p>price: ${user.price}</p>
            <p>amountMonths: ${user.amountMonths}</p>
+           <p>language user on website: ${user.languageStudent}</p>
             <p>prefered schedule (Argentine time): ${user.argentineTime.map(
               (time) =>
                 `<p>${time.day + " " + time.hour + ":" + time.minute}</p>`
@@ -186,6 +186,7 @@ router.post("/", async (req, res) => {
            <p>package: ${user.pricePack}</p>
            <p>price: ${user.price}</p>
            <p>amountMonths: ${user.amountMonths}</p>
+           <p>language user on website: ${user.languageStudent}</p>
            <p>prefered schedule (Argentine time): ${user.argentineTime.map((time) =>
             `<p>${time.day + " " + time.hour + ":" + time.minute}</p>`
           )}</p>

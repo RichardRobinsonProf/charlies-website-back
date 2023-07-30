@@ -36,7 +36,8 @@ async function addUser(user){
 		pricePack: user.pricePack,
 		wantsGroup: user.wantsGroup,
 		price: user.price,
-		amountMonths: user.amountMonths	
+		amountMonths: user.amountMonths,
+		languageStudent: user.languageStudent,
 	});
 	console.log(newUser);
 	const result = await newUser.save();
