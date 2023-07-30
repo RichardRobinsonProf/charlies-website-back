@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
 
 router.post("/send-emailAddress", async (req, res) => {
   const email = req.body.email;
+  const language = req.body.language;
 
   console.log(email)
   try{
@@ -26,7 +27,10 @@ router.post("/send-emailAddress", async (req, res) => {
       to: "prof.richard.robinson@gmail.com",
       subject: "User email",
       text: email,
-      html: `<p>New user shared his/her email.</p> <p>${email}</p>`,
+      html: `<p>New user shared his/her email.</p> 
+             <p>${email}</p>
+             <p>Language user: ${language}</p>
+             `,
     });
     res.send("ok");
       }catch(err){

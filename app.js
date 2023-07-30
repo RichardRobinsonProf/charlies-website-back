@@ -10,6 +10,7 @@ const cors = require('cors');
 // https://www.youtube.com/watch?v=KjheexBLY4A&ab_channel=DominiCode
 
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin'); 
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 
 console.log(process.env.NODE_ENV)
 
